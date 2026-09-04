@@ -64,8 +64,14 @@ real ones the shop runs. Swap in the real nights before launch.
 ## Deploying
 
 `.github/workflows/pages.yml` publishes the repository root to GitHub Pages on
-every push to `main`. It passes `enablement: true`, so the first run turns Pages
-on and points it at Actions by itself — there is nothing to set by hand.
+every push to `main`.
+
+Pages has to be switched on once by hand before the first deploy can succeed:
+**Settings → Pages → Build and deployment → Source: GitHub Actions**. The
+workflow cannot do this for itself — `configure-pages` has an `enablement: true`
+option, but creating a Pages site is a repository-administration call and the
+`GITHUB_TOKEN` is refused it (`Resource not accessible by integration`). Once
+the setting is on, every later push deploys with no further clicks.
 
 For the custom domain, add a `CNAME` file containing `fortheplotorlando.com`,
 then point the DNS at GitHub Pages (four `A` records for the apex, or a `CNAME`
