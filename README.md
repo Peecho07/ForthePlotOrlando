@@ -63,15 +63,12 @@ real ones the shop runs. Swap in the real nights before launch.
 
 ## Deploying
 
-`.github/workflows/pages.yml` publishes the repository root to GitHub Pages on
-every push to `main`.
+GitHub Pages serves this repository directly, set under **Settings → Pages →
+Build and deployment** to *Deploy from a branch*, branch `main`, folder `/`.
+GitHub's own builder publishes every push to `main` — there is no workflow to
+maintain, and `.nojekyll` keeps it from running the files through Jekyll.
 
-Pages has to be switched on once by hand before the first deploy can succeed:
-**Settings → Pages → Build and deployment → Source: GitHub Actions**. The
-workflow cannot do this for itself — `configure-pages` has an `enablement: true`
-option, but creating a Pages site is a repository-administration call and the
-`GITHUB_TOKEN` is refused it (`Resource not accessible by integration`). Once
-the setting is on, every later push deploys with no further clicks.
+The live site is https://peecho07.github.io/ForthePlotOrlando/.
 
 For the custom domain, add a `CNAME` file containing `fortheplotorlando.com`,
 then point the DNS at GitHub Pages (four `A` records for the apex, or a `CNAME`
