@@ -1,4 +1,0 @@
-Photo slots live here. The <img> tags in index.html and book-box.html are
-commented out until real photographs exist. Drop in:
-  latte-flight.jpg   shelves.jpg   book-box.jpg
-then uncomment the matching <img> line and delete the .plate__slot div above it.

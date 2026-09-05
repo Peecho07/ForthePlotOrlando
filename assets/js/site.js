@@ -69,6 +69,23 @@
     if (fromHash) select(fromHash, false);
   }
 
+  /* ---- Photo slots ----
+     Each plate holds a drawn placeholder with the photograph stacked on
+     top of it. Until the shop supplies a file, that photograph 404s — so
+     drop it and let the placeholder underneath show through, rather than
+     leaving a broken image icon on the page. Nothing to change here when
+     the real photographs land; they simply load and cover the slot. */
+  document.querySelectorAll(".plate__photo").forEach(function (img) {
+    function fallback() {
+      var plate = img.closest(".plate");   /* read before detaching the node */
+      img.remove();
+      if (plate) plate.setAttribute("data-awaiting-photo", "true");
+    }
+    img.addEventListener("error", fallback);
+    /* Already failed before this script ran. */
+    if (img.complete && img.naturalWidth === 0) fallback();
+  });
+
   /* Forms are handled in their own file, assets/js/forms.js, which
      only loads on the pages that have one. */
 })();
