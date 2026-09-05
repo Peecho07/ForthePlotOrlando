@@ -331,8 +331,35 @@ a{ color:var(--brass); text-underline-offset:4px; }
 .plate--landscape .plate__frame{ aspect-ratio:4/3; }
 .plate figcaption{ margin-top:1rem; font-family:var(--font-display); font-size:.625rem;
   letter-spacing:.25em; text-transform:uppercase; color:var(--muted-fg); text-align:center; }
-.plate__slot{ position:absolute; inset:0; display:grid; place-items:center; color:var(--border); }
-.plate__slot svg{ width:64px; height:64px; opacity:.8; }
+/* The empty plate. Sits under the photograph and shows through until a
+   file exists, so it has to read as an intentional frame rather than a
+   gap. Engraved hatch, a fall of warm light, and an inner rule — all CSS,
+   no image weight, and entirely covered once a photograph loads. */
+.plate__slot{
+  position:absolute; inset:0; display:grid; place-items:center;
+  color:var(--border); overflow:hidden;
+  background:
+    radial-gradient(120% 90% at 22% 8%, rgba(201,169,98,.13) 0%, transparent 58%),
+    radial-gradient(90% 70% at 82% 100%, rgba(139,38,53,.08) 0%, transparent 60%);
+}
+/* Fine engraved hatch, like the shading on a book plate. */
+.plate__slot::before{
+  content:""; position:absolute; inset:0; opacity:.5;
+  background:repeating-linear-gradient(
+    -45deg, transparent 0 6px, rgba(232,223,212,.035) 6px 7px);
+}
+/* Inner rule, inset from the arch. */
+.plate__slot::after{
+  content:""; position:absolute; inset:14px;
+  border:1px solid rgba(201,169,98,.16); border-radius:var(--radius-arch);
+}
+.plate__slot svg{
+  position:relative; width:72px; height:72px; opacity:.9;
+  color:var(--brass); stroke-opacity:.5;
+}
+@media (prefers-reduced-motion:no-preference){
+  .plate:hover .plate__slot svg{ opacity:1; transition:opacity var(--t-base) ease-out; }
+}
 
 /* ============================================================
    CARDS
