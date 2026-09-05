@@ -52,14 +52,40 @@ real ones the shop runs. Swap in the real nights before launch.
 
 ## Before launch — two things still open
 
-1. **Forms are not connected.** All six forms validate, then show a message
-   saying nothing was sent. Point them at a real service (Formspree, Netlify
-   Forms, a Power Automate endpoint) by replacing the `form[data-demo]` block at
-   the bottom of `assets/js/site.js`.
+1. **Forms need an endpoint.** The delivery code is written and tested; it is
+   waiting on one credential. Open `assets/js/forms.js`, set `ENDPOINT` and
+   `PROVIDER` at the top, and all six forms go live. See *Forms* below.
 2. **Photographs.** Three `<img>` tags are commented out in `index.html` and
    `book-box.html`, with a drawn placeholder plate in their place. Drop
    `latte-flight.jpg`, `shelves.jpg` and `book-box.jpg` into `assets/images/`,
    uncomment the `<img>`, and delete the `.plate__slot` div above it.
+
+## Forms
+
+All six forms — contact, book box waitlist, event list signup, and the author,
+publisher and vendor intake forms — post through `assets/js/forms.js`. Adding a
+form to a page needs no JavaScript: give the `<form>` a `data-form` name, a
+`data-success` message, and a `<p class="form__status">`, and it is picked up.
+
+**To make them deliver,** set two values at the top of that file:
+
+| Service | `PROVIDER` | `ENDPOINT` |
+| --- | --- | --- |
+| [Formspree](https://formspree.io) — free to 50/month | `"formspree"` | the form ID, e.g. `"xdorwkgz"` |
+| [Web3Forms](https://web3forms.com) — free, no account | `"web3forms"` | the access key they email you |
+| Anything else (Power Automate, Zapier) | `"custom"` | the full URL to POST to |
+
+A custom endpoint receives JSON: the form's named fields, plus `_form` (which
+form it was) and `_page` (the page title).
+
+**While `ENDPOINT` is empty the forms run in demo mode.** They behave exactly as
+they will in production — the pause, the disabled button, the success message —
+but nothing is transmitted. The site can be shown to someone in this state. It
+must not be launched in it, so the browser console logs a warning on every page
+load as a reminder.
+
+Each form also carries a hidden honeypot field. Bots fill every input they find;
+a submission that fills this one is dropped silently rather than delivered.
 
 ## Deploying
 

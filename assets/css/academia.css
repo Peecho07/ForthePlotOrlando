@@ -432,8 +432,19 @@ a{ color:var(--brass); text-underline-offset:4px; }
   display:none; border:1px solid var(--brass); border-left-width:3px; border-radius:var(--radius);
   background:rgba(201,169,98,.08); padding:1rem 1.25rem; font-size:1rem;
 }
-.form__status[data-state="shown"]{ display:block; }
+.form__status[data-state]{ display:block; }
+.form__status[data-state="working"]{ color:var(--muted-fg); font-style:italic; }
+.form__status[data-state="error"]{ border-color:var(--crimson); background:rgba(139,38,53,.12); }
 .form .form__status{ grid-column:1 / -1; margin:0; }
+
+/* Spam trap. Off-screen rather than display:none, which some bots skip. */
+.form__trap{
+  position:absolute !important; width:1px; height:1px; padding:0; margin:-1px;
+  overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; border:0;
+}
+
+/* Submit button while a form is in flight. */
+.form button[disabled]{ opacity:.6; cursor:progress; }
 
 /* ============================================================
    TABS (partners page)

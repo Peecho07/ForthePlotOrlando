@@ -69,21 +69,6 @@
     if (fromHash) select(fromHash, false);
   }
 
-  /* ---- Forms ----
-     Nothing is wired to a backend yet. Until the shop connects a
-     form service, submitting shows a message instead of failing
-     silently. Replace this block with the real endpoint at launch. */
-  document.querySelectorAll("form[data-demo]").forEach(function (form) {
-    var status = form.querySelector(".form__status");
-    form.addEventListener("submit", function (e) {
-      e.preventDefault();
-      if (!form.checkValidity()) { form.reportValidity(); return; }
-      if (status) {
-        status.textContent = form.getAttribute("data-demo");
-        status.setAttribute("data-state", "shown");
-        status.focus();
-      }
-      form.reset();
-    });
-  });
+  /* Forms are handled in their own file, assets/js/forms.js, which
+     only loads on the pages that have one. */
 })();
