@@ -50,15 +50,19 @@ and `until` (`"YYYY-MM-DD"`) to limit the range it appears in.
 The dates currently in the file are placeholders — the event *types* are the
 real ones the shop runs. Swap in the real nights before launch.
 
-## Before launch — two things still open
+## Before launch — three things still open
 
 1. **Forms need an endpoint.** The delivery code is written and tested; it is
    waiting on one credential. Open `assets/js/forms.js`, set `ENDPOINT` and
    `PROVIDER` at the top, and all six forms go live. See *Forms* below.
-2. **Photographs.** Three `<img>` tags are commented out in `index.html` and
-   `book-box.html`, with a drawn placeholder plate in their place. Drop
-   `latte-flight.jpg`, `shelves.jpg` and `book-box.jpg` into `assets/images/`,
-   uncomment the `<img>`, and delete the `.plate__slot` div above it.
+2. **Photographs are stand-ins.** All three slots are filled, but with
+   supplied stock rather than photographs of the shop. Replace them with real
+   ones when the shop can shoot: same filenames in `assets/images/`, no code
+   change. See `assets/images/README.md` for the crop and size spec.
+3. **The event dates are placeholders.** The event *types* on the calendar are
+   real; the specific nights are invented. Capture the real schedule from the
+   shop and put it in `assets/js/events-data.js` before launch, or the calendar
+   will send people in on the wrong evening.
 
 ## Forms
 

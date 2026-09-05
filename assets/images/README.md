@@ -23,6 +23,15 @@ contrasty images tend to muddy under the treatment.
 Until a file exists, that slot shows a drawn placeholder instead. The page
 is never broken by a missing photograph, so these can land one at a time.
 
+## What is in here now
+
+All three slots are filled. The current files were supplied as 1920x1080
+landscape and cropped to 4:5 at 864x1080, 75-110KB each.
+
+These are stand-in images, not photographs of the shop. Replace them with
+real ones when the shop can shoot: same filenames, no code change. The
+crop notes above are the only thing to match.
+
 ## Alt text
 
 Each image already carries alt text describing it for screen readers and
