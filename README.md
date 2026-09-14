@@ -20,7 +20,7 @@ double-clicking a file — the pages load their JS as separate files.
 | File | What it is |
 | --- | --- |
 | `index.html` | Home: the story, the café, the shelves, hours |
-| `coffee-shop.html` | The full drinks menu and prices, built from a data file |
+| `coffee-shop.html` | The full drinks menu and prices, built from a data file. **Not linked from the nav** — see below |
 | `events.html` | Self-filling month calendar plus the recurring nights |
 | `book-box.html` | Monthly signed book box, tiers and waitlist |
 | `partners.html` | Tabbed intake forms for authors, publishers and vendors |
@@ -57,9 +57,32 @@ prices without a dollar sign — the page adds it, so every figure on the board 
 formatted the same way. `"0.00"` renders as *No charge* and a negative number
 renders as *off*, which is how the bring-your-own-cup discount is written.
 
-**The menu in the file now is a placeholder.** While `FTP_MENU_DRAFT` at the top
-of it is `true`, the page carries a visible notice saying so. Put the real menu
-in, set that flag to `false`, and the notice disappears.
+The menu in the file is the shop's real one, transcribed from the printed
+Library Card: the `name` is the title in the TITLE column, the `desc` is the
+drink itself from SUBJECT, and the price is DUE.
+
+**To stage a menu change,** set `FTP_MENU_DRAFT` to `true` while the new menu is
+half entered. The page then carries a visible notice saying the prices are not
+final, so a part finished menu cannot quietly pass for a real one. Set it back to
+`false` when the menu is complete.
+
+### The page is currently unlinked
+
+`coffee-shop.html` is finished and deployed, but nothing links to it: it is out
+of the nav, the mobile panel, the footer, the 404 list and `sitemap.xml`, and it
+carries `<meta name="robots" content="noindex">`. It is reachable only by typing
+the URL, pending a check of the transcribed menu against the printed card.
+
+**To put it back in front of people,** add this entry to the three link lists on
+every page — the `.nav__links` list, the `.nav__panel` list and the footer
+*Pages* list — directly above the Events entry:
+
+```html
+<li><a href="coffee-shop.html">Coffee Shop</a></li>
+```
+
+then drop the `noindex` meta, restore the `coffee-shop.html` line in
+`sitemap.xml`, and point the home page café section's button at it.
 
 ## Editing the calendar
 
@@ -98,11 +121,10 @@ real ones the shop runs. Swap in the real nights before launch.
    real; the specific nights are invented. Capture the real schedule from the
    shop and put it in `assets/js/events-data.js` before launch, or the calendar
    will send people in on the wrong evening.
-4. **The drinks menu is a placeholder.** Every drink and price on
-   `coffee-shop.html` is invented. Capture the shop's real menu, put it in
-   `assets/js/menu-data.js`, and set `FTP_MENU_DRAFT` to `false`. Until that is
-   done the page shows a notice saying the prices are not real, so it cannot
-   quietly go live with the wrong ones.
+4. **The Coffee Shop page is unlinked.** It carries the shop's real menu, but
+   that menu was transcribed from a photograph of the printed card rather than
+   typed from the card itself. Check it against the original, then relink it as
+   described under *Editing the drinks menu*.
 
 ## Forms
 

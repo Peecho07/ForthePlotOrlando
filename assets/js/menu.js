@@ -61,8 +61,14 @@
     }
 
     line.appendChild(head);
-    line.appendChild(el("span", "menu__leader"));
-    line.appendChild(priceCell(item));
+    /* The leader only earns its keep when it runs to a figure. A drink the
+       menu prices at the counter rather than on the card gets no leader
+       trailing off into nothing. */
+    var priced = (item.sizes && item.sizes.length) || item.price != null;
+    if (priced) {
+      line.appendChild(el("span", "menu__leader"));
+      line.appendChild(priceCell(item));
+    }
     li.appendChild(line);
 
     if (item.desc) li.appendChild(el("p", "menu__desc", item.desc));
