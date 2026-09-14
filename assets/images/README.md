@@ -5,7 +5,7 @@ these exact names and they appear automatically — no code changes.
 
 | File | Where it appears | Frame |
 | --- | --- | --- |
-| `latte-flight.jpg` | Home, The Café section | portrait, 4:5 |
+| `latte-flight.jpg` | Home (The Café) and the Coffee Shop page | portrait, 4:5 |
 | `shelves.jpg` | Home, The Shelves section | portrait, 4:5 |
 | `book-box.jpg` | Book Box page | portrait, 4:5 |
 
@@ -36,5 +36,6 @@ crop notes above are the only thing to match.
 
 Each image already carries alt text describing it for screen readers and
 for anyone whose images fail to load. If the photograph you supply differs
-from the description, update the `alt` attribute in `index.html` or
-`book-box.html` to match what is actually in the frame.
+from the description, update the `alt` attribute in `index.html`,
+`coffee-shop.html` or `book-box.html` to match what is actually in the frame.
+`latte-flight.jpg` now appears on two pages, so its alt text lives in both.

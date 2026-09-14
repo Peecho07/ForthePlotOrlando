@@ -20,11 +20,46 @@ double-clicking a file — the pages load their JS as separate files.
 | File | What it is |
 | --- | --- |
 | `index.html` | Home: the story, the café, the shelves, hours |
+| `coffee-shop.html` | The full drinks menu and prices, built from a data file |
 | `events.html` | Self-filling month calendar plus the recurring nights |
 | `book-box.html` | Monthly signed book box, tiers and waitlist |
 | `partners.html` | Tabbed intake forms for authors, publishers and vendors |
 | `contact.html` | Address, hours, map, message form |
 | `404.html` | Not-found page (served automatically by GitHub Pages) |
+
+## Editing the drinks menu
+
+`assets/js/menu-data.js` is the only file to touch. The Coffee Shop page builds
+its index and every section from what is in there.
+
+```js
+{
+  id: "signatures",               // the anchor the index links to
+  num: "II",                      // roman numeral above the heading
+  name: "Signature Lattes",
+  blurb: "One line under the heading.",   // optional
+  note: "A small line under the items.",  // optional
+  items: [
+    {
+      name: "Enemies to Lovers",
+      desc: "What is in it.",
+      sizes: [ { label: "12 oz", price: "6.00" },
+               { label: "16 oz", price: "6.75" } ],
+      tags: ["Hot", "Iced"],      // small labels beside the name
+      flag: "signature"           // marks it with the brass ✦
+    }
+  ]
+}
+```
+
+Use `price: "6.00"` instead of `sizes` for a drink that is one price. Write
+prices without a dollar sign — the page adds it, so every figure on the board is
+formatted the same way. `"0.00"` renders as *No charge* and a negative number
+renders as *off*, which is how the bring-your-own-cup discount is written.
+
+**The menu in the file now is a placeholder.** While `FTP_MENU_DRAFT` at the top
+of it is `true`, the page carries a visible notice saying so. Put the real menu
+in, set that flag to `false`, and the notice disappears.
 
 ## Editing the calendar
 
@@ -50,7 +85,7 @@ and `until` (`"YYYY-MM-DD"`) to limit the range it appears in.
 The dates currently in the file are placeholders — the event *types* are the
 real ones the shop runs. Swap in the real nights before launch.
 
-## Before launch — three things still open
+## Before launch — four things still open
 
 1. **Forms need an endpoint.** The delivery code is written and tested; it is
    waiting on one credential. Open `assets/js/forms.js`, set `ENDPOINT` and
@@ -63,6 +98,11 @@ real ones the shop runs. Swap in the real nights before launch.
    real; the specific nights are invented. Capture the real schedule from the
    shop and put it in `assets/js/events-data.js` before launch, or the calendar
    will send people in on the wrong evening.
+4. **The drinks menu is a placeholder.** Every drink and price on
+   `coffee-shop.html` is invented. Capture the shop's real menu, put it in
+   `assets/js/menu-data.js`, and set `FTP_MENU_DRAFT` to `false`. Until that is
+   done the page shows a notice saying the prices are not real, so it cannot
+   quietly go live with the wrong ones.
 
 ## Forms
 
